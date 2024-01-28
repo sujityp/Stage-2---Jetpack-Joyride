@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://d340r3colxcxh"]
+
+[ext_resource type="Script" path="res://Scripts/bird.gd" id="1_jacav"]
+[ext_resource type="Texture2D" uid="uid://dnm5tqjemfj0a" path="res://Assets/sprites/redbird-upflap.png" id="1_ka1qy"]
+[ext_resource type="Texture2D" uid="uid://cwk6qdjnrghrd" path="res://Assets/sprites/redbird-downflap.png" id="2_36nmu"]
+[ext_resource type="Texture2D" uid="uid://kq08ugohekfg" path="res://Assets/sprites/redbird-midflap.png" id="3_cirec"]
+[ext_resource type="AudioStream" uid="uid://cagajv746y7s0" path="res://Assets/audio/wing.wav" id="5_aja2v"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k378e"]
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_5lme0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_36nmu")]
+}
+
+[sub_resource type="Animation" id="Animation_cs12v"]
+resource_name = "flap"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_36nmu"), ExtResource("3_cirec"), ExtResource("1_ka1qy")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mclwm"]
+_data = {
+"RESET": SubResource("Animation_5lme0"),
+"flap": SubResource("Animation_cs12v")
+}
+
+[node name="Bird" type="CharacterBody2D" groups=["player"]]
+process_mode = 1
+collision_layer = 2
+script = ExtResource("1_jacav")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_36nmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_k378e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionShape2D")
+libraries = {
+"": SubResource("AnimationLibrary_mclwm")
+}
+
+[node name="FlapSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_aja2v")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c83iq14t06e7u"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_i88of"]
+[ext_resource type="Texture2D" uid="uid://co2xdau2hhoje" path="res://Assets/sprites/bullets/1.png" id="2_jkn0f"]
+[ext_resource type="Texture2D" uid="uid://d3fneuhn52tu6" path="res://Assets/sprites/bullets/1_2.png" id="3_pxigy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3lkx5"]
+radius = 3.0
+height = 16.0
+
+[node name="Bullet" type="CharacterBody2D"]
+z_index = -1
+position = Vector2(60, 14)
+collision_layer = 2
+script = ExtResource("1_i88of")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9.53674e-07, 0)
+shape = SubResource("CapsuleShape2D_3lkx5")
+
+[node name="Bullet2" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_jkn0f")
+
+[node name="Bullet1" type="Sprite2D" parent="."]
+rotation = 0.785398
+scale = Vector2(2, 2)
+texture = ExtResource("3_pxigy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

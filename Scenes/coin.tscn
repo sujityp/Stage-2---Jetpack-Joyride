@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://dc8y64vciuw6j"]
+
+[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_uqojq"]
+[ext_resource type="Texture2D" uid="uid://trhm0rtltc24" path="res://Assets/sprites/Coin_Gems/MonedaD.png" id="2_bal8x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxbuf"]
+atlas = ExtResource("2_bal8x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vljo1"]
+atlas = ExtResource("2_bal8x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uffsa"]
+atlas = ExtResource("2_bal8x")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cm4x7"]
+atlas = ExtResource("2_bal8x")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0ok2"]
+atlas = ExtResource("2_bal8x")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qtqr7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxbuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vljo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uffsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cm4x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0ok2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgxxl"]
+size = Vector2(14, 16)
+
+[node name="Coin" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_uqojq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qtqr7")
+frame_progress = 0.932763
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hgxxl")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

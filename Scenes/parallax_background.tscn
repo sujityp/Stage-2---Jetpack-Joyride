@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://dttjsl1cshbai"]
+
+[ext_resource type="Script" path="res://Scripts/ParallaxBackground.gd" id="1_nnmc0"]
+[ext_resource type="Texture2D" uid="uid://b65igrfscfsqa" path="res://Assets/sprites/background-night.png" id="2_olgtw"]
+[ext_resource type="Texture2D" uid="uid://b8sn58hbdgyfn" path="res://Assets/sprites/base.png" id="3_48cqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v51i0"]
+size = Vector2(576, 112)
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_nnmc0")
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+texture_repeat = 2
+position = Vector2(288, 256)
+texture = ExtResource("2_olgtw")
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 512)
+
+[node name="Obstacles" type="ParallaxLayer" parent="."]
+
+[node name="GroundParallax" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="GroundParallax"]
+texture_repeat = 2
+position = Vector2(288, 456)
+texture = ExtResource("3_48cqs")
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 112)
+
+[node name="CeilingCollisionShape" type="StaticBody2D" parent="."]
+position = Vector2(288, -57)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingCollisionShape"]
+position = Vector2(-145, 0)
+shape = SubResource("RectangleShape2D_v51i0")
+
+[node name="GroundCollisionShape" type="StaticBody2D" parent="."]
+position = Vector2(288, 456)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundCollisionShape"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_v51i0")
