@@ -9,6 +9,10 @@ script = ExtResource("1_0s53w")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_kjaq1")]
 
+[node name="CollisionShape2D" parent="ParallaxBackground/CeilingCollisionShape" index="0"]
+visible = false
+position = Vector2(-140, 8)
+
 [node name="Bird" parent="." instance=ExtResource("2_hjccw")]
 position = Vector2(94, 177)
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d340r3colxcxh"]
+[gd_scene load_steps=11 format=3 uid="uid://d340r3colxcxh"]
 
 [ext_resource type="Script" path="res://Scripts/bird.gd" id="1_jacav"]
 [ext_resource type="Texture2D" uid="uid://dnm5tqjemfj0a" path="res://Assets/sprites/redbird-upflap.png" id="1_ka1qy"]
 [ext_resource type="Texture2D" uid="uid://cwk6qdjnrghrd" path="res://Assets/sprites/redbird-downflap.png" id="2_36nmu"]
 [ext_resource type="Texture2D" uid="uid://kq08ugohekfg" path="res://Assets/sprites/redbird-midflap.png" id="3_cirec"]
-[ext_resource type="AudioStream" uid="uid://cagajv746y7s0" path="res://Assets/audio/wing.wav" id="5_aja2v"]
+[ext_resource type="AudioStream" uid="uid://bkj0ggrbh2lko" path="res://Assets/audio/looping_gun.wav" id="5_3emkx"]
+[ext_resource type="AudioStream" uid="uid://cck5xs2bxi50y" path="res://Assets/audio/gun_end.wav" id="6_swvbr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k378e"]
 height = 24.0
@@ -65,5 +66,8 @@ libraries = {
 "": SubResource("AnimationLibrary_mclwm")
 }
 
-[node name="FlapSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_aja2v")
+[node name="LoopingGunSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3emkx")
+
+[node name="EndGunSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_swvbr")
